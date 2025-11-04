@@ -1,0 +1,95 @@
+ html,body {
+    opacity: 0;
+    animation: fadeIn 2s ease-in forwards;
+     margin: 0;
+     height: 100%;
+     overflow: hidden;
+     background: url("../images/start_background.jpg") no-repeat center center fixed;
+     font-family: "Creepster", "微软雅黑", cursive;
+ }
+/* 动画关键帧 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(1.05);
+        /* 轻微放大，让进入更柔和 */
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+ /* 主内容区域 */
+ .container {
+     position: relative;
+     top: 50%;
+     transform: translateY(-50%);
+     text-align: center;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 20px;
+     color: #fff;
+ }
+.container p {
+       font-size: 120px;
+        font-weight: 500;
+       
+        display: inline-block;
+        position: relative;
+        /* 发光+金属血光渐变 */
+        background: linear-gradient(180deg,
+                #bc1b1b 10%,
+                #911a1a 30%,
+                #6b0000 80%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow:
+            0 0 10px rgba(255, 60, 60, 0.8),
+            0 0 20px rgba(255, 0, 0, 0.6),
+            2px 4px 8px rgba(0, 0, 0, 0.8);
+        transition: transform 0.3s ease, text-shadow 0.3s ease;
+     }
+.container p:hover {
+    transform: scale(1.05);
+    text-shadow:
+        0 0 12px rgba(255, 80, 80, 1),
+        0 0 25px rgba(255, 0, 0, 0.8),
+        3px 6px 10px rgba(0, 0, 0, 0.9);
+        }
+
+ /* 开始按钮 */
+ .btn {
+     font-size: 28px;
+     padding: 15px 60px;
+     color: #fff;
+     border: none;
+     border-radius: 30px;
+     background-color: #e80808;
+     cursor: pointer;
+     text-transform: uppercase;
+     transition: all 0.3s ease;
+     position: relative;
+ }
+
+
+ .btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ff4444, inset 0;
+    color: #fff;
+    box-shadow: 0 0 30px #ff0000, inset 0 0 10px #ff0000;
+ }
+
+
+
+ /* 音乐提示 */
+ .music-note {
+     position: fixed;
+     bottom: 20px;
+     right: 20px;
+     color: #ff4444;
+     font-size: 20px;
+ }

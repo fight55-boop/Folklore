@@ -1,0 +1,163 @@
+/* 基础样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microsoft YaHei", sans-serif;
+}
+
+body {
+    background-color: #121212;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image:
+            linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+            url("../images/login.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 20px;
+}
+
+/* 登录容器样式 */
+.登录容器 {
+    width: 100%;
+    max-width: 400px;
+    background-color: rgba(30, 30, 40, 0.9);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* 选项卡样式 */
+.选项卡容器 {
+    display: flex;
+    background-color: #1a1a2a;
+}
+
+.选项卡 {
+    flex: 1;
+    padding: 15px 0;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: #aaa;
+    transition: all 0.3s;
+}
+
+.选项卡.激活 {
+    color: #ffcc00;
+    border-bottom: 2px solid #ffcc00;
+}
+
+/* 表单样式 */
+.表单容器 {
+    padding: 30px;
+}
+
+.表单组 {
+    margin-bottom: 20px;
+}
+
+.表单组 label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ccc;
+}
+
+.表单组 input {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #2a2a3a;
+    border: 1px solid #3a3a4a;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.表单组 input:focus {
+    outline: none;
+    border-color: #ffcc00;
+}
+
+.选项 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.记住我 {
+    display: flex;
+    align-items: center;
+}
+
+.记住我 input {
+    margin-right: 5px;
+}
+
+.忘记密码 {
+    color: #ffcc00;
+    text-decoration: none;
+}
+
+.忘记密码:hover {
+    text-decoration: underline;
+}
+
+.登录按钮 {
+    width: 100%;
+    padding: 12px;
+    background-color: #ffcc00;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.登录按钮:hover {
+    background-color: #ffd633;
+}
+
+.rules {
+    margin-top: 1px;
+    padding: 1px;
+}
+.rule {
+    font-size: 12px;
+    margin: 6px 0;
+}
+.注册按钮 {
+    width: 100%;
+    padding: 12px;
+    background-color: #ffcc00;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.注册按钮:hover {
+    background-color: #ffd633;
+}
+
+/* 响应式调整 */
+@media (max-width: 480px) {
+    .登录容器 {
+        max-width: 100%;
+    }
+
+    .表单容器 {
+        padding: 20px;
+    }
+}

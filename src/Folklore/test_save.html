@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>读档功能测试</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>读档功能专项测试</h1>
+
+    <button onclick="testLoad()">测试读档功能</button>
+    <button onclick="checkDatabase()">检查数据库存档</button>
+
+    <h3>测试结果:</h3>
+    <div id="result"></div>
+
+    <script>
+        function log(message, isError = false) {
+            console.log(message);
+            const result = document.getElementById('result');
+            const div = document.createElement('div');
+            div.className = isError ? 'error' : 'success';
+            div.innerHTML = '<strong>' + new Date().toLocaleTimeString() + '</strong> - ' + message;
+            result.appendChild(div);
+        }
+
+        function testLoad() {
+            log('=== 开始读档测试 ===');
+
+            $.ajax({
+                url: 'game_save.php',
+                type: 'POST',
+                data: {
+                    action: 'load'
+                },
+                dataType: 'json',
+                success: function (response) {
+                    log('读档响应: ' + JSON.stringify(response));
+
+                    if (response.success) {
+                        log('✓ PHP读档成功');
+
+                        if (response.game_data) {
+                            try {
+                                const saveData = JSON.parse(response.game_data);
+                                log('✓ 存档数据解析成功');
+                                log('存档内容: <pre>' + JSON.stringify(saveData, null, 2) + '</pre>');
+
+                                // 检查关键字段
+                                if (saveData.passage) {
+                                    log('✓ 包含段落信息: ' + saveData.passage);
+                                } else {
+                                    log('❌ 缺少段落信息', true);
+                                }
+
+                                if (saveData.variables) {
+                                    log('✓ 包含游戏变量，数量: ' + Object.keys(saveData.variables).length);
+                                } else {
+                                    log('❌ 缺少游戏变量', true);
+                                }
+
+                            } catch (e) {
+                                log('❌ 存档数据解析失败: ' + e.message, true);
+                                log('原始数据: ' + response.game_data.substring(0, 200));
+                            }
+                        } else {
+                            log('❌ 响应中没有game_data字段', true);
+                        }
+                    } else {
+                        log('❌ PHP读档失败: ' + response.message, true);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    log('❌ AJAX请求失败: ' + error, true);
+                    log('HTTP状态: ' + xhr.status, true);
+                }
+            });
+        }
+
+        function checkDatabase() {
+            log('=== 检查数据库存档状态 ===');
+
+            // 先保存一个测试存档，然后立即读取
+            const testData = {
+                passage: "TestPassage",
+                variables: {
+                    test: "value",
+                    number: 123
+                },
+                timestamp: new Date().toISOString()
+            };
+
+            $.ajax({
+                url: 'game_save.php',
+                type: 'POST',
+                data: {
+                    action: 'save',
+                    game_data: JSON.stringify(testData)
+                },
+                dataType: 'json',
+                success: function (saveResponse) {
+                    log('保存测试存档: ' + JSON.stringify(saveResponse));
+
+                    if (saveResponse.success) {
+                        // 等待一下然后读取
+                        setTimeout(() => {
+                            $.ajax({
+                                url: 'game_save.php',
+                                type: 'POST',
+                                data: { action: 'load' },
+                                dataType: 'json',
+                                success: function (loadResponse) {
+                                    log('读取测试存档: ' + JSON.stringify(loadResponse));
+
+                                    if (loadResponse.success && loadResponse.game_data) {
+                                        const loadedData = JSON.parse(loadResponse.game_data);
+                                        if (loadedData.passage === "TestPassage") {
+                                            log('✓ 数据库读写测试通过');
+                                        } else {
+                                            log('❌ 数据库读取的数据不正确', true);
+                                        }
+                                    } else {
+                                        log('❌ 无法读取刚保存的存档', true);
+                                    }
+                                }
+                            });
+                        }, 500);
+                    } else {
+                        log('❌ 无法保存测试存档', true);
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

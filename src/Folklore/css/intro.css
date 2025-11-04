@@ -1,0 +1,112 @@
+ body {
+     margin: 0;
+     font-family: "Microsoft YaHei", sans-serif;
+     background-color: #0e0e0e;
+     color: #f1f1f1;
+     line-height: 1.8;
+     overflow-x: hidden;
+ }
+
+ header {
+     background: rgba(0, 0, 0, 0.8);
+     text-align: center;
+     padding: 2rem 1rem;
+     border-bottom: 2px solid #b10000;
+ }
+
+ header h1 {
+     font-size: 2rem;
+     color: #ff2c2c;
+     letter-spacing: 3px;
+ }
+
+ .intro-section {
+     max-width: 900px;
+     margin: 3rem auto;
+     padding: 0 1.5rem;
+     text-align: center;
+ }
+
+ .intro-section h2 {
+     color: #ff4444;
+     font-size: 1.6rem;
+     margin-bottom: 1rem;
+ }
+
+ .intro-section p {
+     color: #ddd;
+     font-size: 1.1rem;
+     text-indent: 2em;
+ }
+
+ .intro-section p.text1 {
+     margin-top: 1rem;
+     color: #9b1d1d;
+     font-size: 1.3rem;
+     text-shadow: 0 5px 15px rgba(228, 2, 2, 0.947);
+ }
+
+ .screenshot {
+     width: 60%;
+     max-width: 800px;
+     margin: 2rem auto;
+     display: block;
+     border-radius: 20px;
+     box-shadow: 0 0 20px rgb(224, 7, 7);
+ }
+
+ .feature-list {
+     margin-top: 2rem;
+     text-align: left;
+ }
+
+ .feature-list li {
+     margin-bottom: 0.8rem;
+     color: #ccc;
+ }
+
+ .feature-list li::before {
+     content: "• ";
+     color: #ff2c2c;
+ }
+
+ .btn {
+     display: inline-block;
+     margin-top: 2.5rem;
+     padding: 0.8rem 2rem;
+     background-color: #b10000;
+     color: white;
+     border: none;
+     border-radius: 6px;
+     font-size: 1.1rem;
+     cursor: pointer;
+     transition: 0.3s;
+ }
+
+ .btn:hover {
+     background-color: #ff2c2c;
+     transform: scale(1.05);
+ }
+
+ footer {
+     text-align: center;
+     padding: 2rem;
+     color: #666;
+     font-size: 0.9rem;
+     border-top: 1px solid #222;
+ }
+
+ /* 背景渐变动画 */
+ @keyframes fadeIn {
+     from {
+         opacity: 0;
+     }
+
+     to {
+         opacity: 1;
+     }
+ }
+
+ body {
+     animation: fadeIn 1.5s ease-in;
+ }
